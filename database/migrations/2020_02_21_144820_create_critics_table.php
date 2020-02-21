@@ -19,8 +19,6 @@ class CreateCriticsTable extends Migration
             $table->integer('film_id');
             $table->decimal('score', 3, 1);
             $table->text('comment');
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at');
             $table->timestamps();
 
             $table->primary(['id']);

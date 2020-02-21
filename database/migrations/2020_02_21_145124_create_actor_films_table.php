@@ -13,14 +13,12 @@ class CreateFilmActorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('film__actors', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('actor_films', function (Blueprint $table) {
             $table->integer('actor_id');
             $table->integer('film_id');
-            $table->datetime('created_at');
-            $table->datetime('update_at');
             $table->timestamps();
 
+            $table->primary(['actor_id', 'film_id']);
             $table->foreign('actor_id')->references('id')->on('actors');
             $table->foreign('film_id')->references('id')->on('films');
         });

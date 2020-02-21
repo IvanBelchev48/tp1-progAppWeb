@@ -17,7 +17,7 @@ class CreateActorsTable extends Migration
             $table->bigIncrements('id');
             $table->string('last_name');
             $table->string('first_name');
-            $table->datetime('date');
+            $table->date('birthdate');
             $table->timestamps();
 
             $table->primary('id');

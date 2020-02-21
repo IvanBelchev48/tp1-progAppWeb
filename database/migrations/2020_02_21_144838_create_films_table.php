@@ -23,7 +23,6 @@ class CreateFilmsTable extends Migration
             $table->integer('language_id');
             $table->string('special_features');
             $table->string('image');
-            $table->datetime('created_at');
             $table->timestamps();
 
             $table->primary('id');
