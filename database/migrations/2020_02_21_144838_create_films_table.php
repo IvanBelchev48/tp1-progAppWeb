@@ -21,7 +21,7 @@ class CreateFilmsTable extends Migration
             $table->text('description');
             $table->string('rating');
             $table->integer('language_id');
-            $table->string('specialfeatures');
+            $table->string('special_features');
             $table->string('image');
             $table->datetime('created_at');
             $table->timestamps();
