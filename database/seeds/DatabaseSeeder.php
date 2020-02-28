@@ -14,11 +14,16 @@ class DatabaseSeeder extends Seeder
         //$path = '/seeds/tp1.sql';
         //DB::unprepared(file_get_contents($path));
 
-        $sql = file_get_contents(database_path() . '/seeds/actors.sql');
-        $sql = file_get_contents(database_path() . '/seeds/films.sql');
-        $sql = file_get_contents(database_path() . '/seeds/actors_films.sql');
-        $sql = file_get_contents(database_path() . '/seeds/languages.sql');
+        //$sql = file_get_contents(database_path() . '/seeds/actors.sql');
+        //DB::statement($sql);
 
+        //$sql = file_get_contents(database_path() . '/seeds/films.sql');
+        //DB::statement($sql);
+
+        //$sql = file_get_contents(database_path() . '/seeds/actors_films.sql');
+        //DB::statement($sql);
+
+        $sql = file_get_contents(database_path() . '/seeds/languages.sql');
         DB::statement($sql);
     }
 }
