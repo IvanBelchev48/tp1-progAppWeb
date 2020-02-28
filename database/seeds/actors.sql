@@ -1,4 +1,4 @@
-INSERT INTO "actors" ("id", "first_name", "last_name", "birthdate") VALUES
+INSERT INTO `actors` (`id`, `first_name`, `last_name`, `birthdate`) VALUES
 (1, 'PENELOPE', 'GUINESS', '0000-00-00'),
 (2, 'NICK', 'WAHLBERG', '0000-00-00'),
 (3, 'ED', 'CHASE', '0000-00-00'),

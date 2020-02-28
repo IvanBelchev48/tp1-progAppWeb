@@ -1,4 +1,4 @@
-INSERT INTO `film_actor` (`actor_id`, `film_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `actor_films` (`actor_id`, `film_id`, `created_at`, `updated_at`) VALUES
 (1, 1, '2006-02-15 15:05:03', '0000-00-00 00:00:00'),
 (1, 23, '2006-02-15 15:05:03', '0000-00-00 00:00:00'),
 (1, 25, '2006-02-15 15:05:03', '0000-00-00 00:00:00'),
