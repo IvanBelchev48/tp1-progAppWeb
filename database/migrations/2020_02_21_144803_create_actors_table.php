@@ -19,8 +19,6 @@ class CreateActorsTable extends Migration
             $table->string('first_name');
             $table->date('birthdate');
             $table->timestamps();
-
-            $table->primary('id');
         });
     }
 
