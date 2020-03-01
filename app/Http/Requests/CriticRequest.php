@@ -13,7 +13,7 @@ class CriticRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class CriticRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => 'required',
+            'film_id' => 'reuired',
+            'score' => 'required',
+            'comment' => 'required',
         ];
     }
 }
