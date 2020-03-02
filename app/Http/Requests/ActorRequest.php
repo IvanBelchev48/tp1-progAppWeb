@@ -24,8 +24,8 @@ class ActorRequest extends FormRequest
     public function rules()
     {
         return [
-            'last_name' => 'required',
-            'first_name' => 'required',
+            'last_name' => 'required|max:50',
+            'first_name' => 'required|max:50',
             'birthdate' => 'required',
         ];
     }

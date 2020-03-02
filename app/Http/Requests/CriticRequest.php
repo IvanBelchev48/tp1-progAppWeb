@@ -24,8 +24,8 @@ class CriticRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'film_id' => 'reuired',
+            'user_id' => 'required|max:11',
+            'film_id' => 'reuired|max:11',
             'score' => 'required',
             'comment' => 'required',
         ];
