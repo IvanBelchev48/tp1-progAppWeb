@@ -15,6 +15,7 @@ class Film extends Model
     public function languages(){
         return $this->belongsTo('App\Language');
     }
+
     public function actors(){
         return $this->belongsToMany('App\Actor');
     }

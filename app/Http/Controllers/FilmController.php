@@ -50,53 +50,44 @@ class FilmController extends Controller
         //  ]);
 
         $film = Film::create($request->all());
-
-        return $film;
+        return response()->json($film, 201);
+        //return $film;
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Film $film)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $film;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Film $film)
     {
-        //
+        $film->update($request->all());
+        return response()->json($film, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Film $film)
     {
-        //
+        $film->delete();
+        return response()->json(null, 204);
     }
 }
