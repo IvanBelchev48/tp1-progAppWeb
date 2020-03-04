@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Actor;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,32 +14,23 @@ use Illuminate\Http\Request;
 |
 */
 
-/*Route::get('films', function() {
-    // If the Content-Type and Accept headers are set to 'application/json',
-    // this will return a JSON structure. This will be cleaned up later.
-    return Film::all();
-});
+//Actors Routes -----------------------------------------------------------
 
-Route::get('films/{id}', function($id) {
-    return Film::find($id);
-});
+Route::get('actors', 'ActorController@index');
+Route::get('actors/{actor}', 'ActorController@show');
+Route::post('actors', 'ActorController@store');
+Route::put('actors/{actor}', 'ActorController@update');
+Route::delete('actors/{actor}', 'ActorController@delete');
 
-Route::post('films', function(Request $request) {
-    return Film::create($request->all);
-});
+//Critics Routes -----------------------------------------------------------
 
-Route::put('films/{id}', function(Request $request, $id) {
-    $film = Film::findOrFail($id);
-    $film->update($request->all());
+Route::get('critics', 'CriticController@index');
+Route::get('critics/{critic}', 'CriticController@show');
+Route::post('critics', 'CriticController@store');
+Route::put('critics/{critic}', 'CriticController@update');
+Route::delete('critics/{critic}', 'CriticController@delete');
 
-    return $film;
-});
-
-Route::delete('films/{id}', function($id) {
-    Film::find($id)->delete();
-
-    return 204;
-});*/
+//Films Routes -----------------------------------------------------------
 
 Route::get('films', 'FilmController@index');
 Route::get('films/{film}', 'FilmController@show');
