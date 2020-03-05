@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Film;
+use App\Actor;
 use App\Http\Resources\FilmResource;
 use App\Http\Requests\FilmRequest;
 
