@@ -17,9 +17,10 @@ class CriticController extends Controller
         return Critic::all();
     }
 
-    public function critics_film()
+    public function critics_film(Film $film)
     {
-        return Critic::all();
+        $critic = Critic::with('films')->get();
+        return $critic;
     }
 
     /**

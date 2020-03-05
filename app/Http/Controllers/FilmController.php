@@ -6,6 +6,7 @@ use App\Film;
 use App\Actor;
 use App\Http\Resources\FilmResource;
 use App\Http\Requests\FilmRequest;
+use Cassandra\Decimal;
 
 class FilmController extends Controller
 {
@@ -49,8 +50,24 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
+        return $film;
+    }
+
+    public function showFilmWithActors(Film $film)
+    {
         $film = Film::with('actors')->findOrFail($film->id);
         return $film;
+    }
+
+    public function showFilmWithCritics(Film $film)
+    {
+        $film = Film::with('critics')->findOrFail($film->id);
+        return $film;
+    }
+
+    public function showFilmWithRating(Film $film, $rating)
+    {
+        return $film->where('rating', $rating);
     }
 
     /**

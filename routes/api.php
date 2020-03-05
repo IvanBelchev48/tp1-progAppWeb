@@ -15,10 +15,6 @@ use App\Film;
 |
 */
 
-Route::bind('film_id', function($actor_id) {
-    return Film::with('friends')->findOrFail($actor_id);
-});
-
 Route::post('login', 'Auth\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
 
@@ -45,8 +41,10 @@ Route::get('actors/{actor}', 'ActorController@show');
 /* Critics Routes */
 Route::get('critics', 'CriticController@index');
 Route::get('critics/{critic}', 'CriticController@show');
-Route::get('critics/{film_id}', 'CriticController@critics_film');
 
 /* Films Routes */
 Route::get('films', 'FilmController@index');
 Route::get('films/{film}', 'FilmController@show');
+Route::get('films/rating/{rating}', 'FilmController@showFilmWithRating'); /* TO DO */
+Route::get('films/{film}/actors', 'FilmController@showFilmWithActors');
+Route::get('films/{film}/critics', 'FilmController@showFilmWithCritics');
