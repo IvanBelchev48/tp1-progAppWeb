@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Film;
+use App\Actor;
 use App\Http\Resources\FilmResource;
 use App\Http\Requests\FilmRequest;
 
@@ -48,6 +49,8 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
+        $film = Film::with('actors')->findOrFail($film->id);
+        
         return $film;
     }
 

@@ -17,6 +17,11 @@ class CriticController extends Controller
         return Critic::all();
     }
 
+    public function critics_film()
+    {
+        return Critic::all();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -46,9 +51,9 @@ class CriticController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Actor $actor)
+    public function show(Critic $critic)
     {
-        return $actor;
+        return $critic;
     }
 
     /**
