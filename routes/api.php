@@ -14,8 +14,8 @@ use App\Actor;
 |
 */
 
-Route::post('login', 'LoginController@login');
-Route::post('register', 'RegisterController@register');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('register', 'Auth\RegisterController@register');
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('userDetails', 'UserController@userDetails');
