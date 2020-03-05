@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ActorRequest;
-
 use App\Actor;
+use App\Http\Requests\ActorRequest;
 
 class ActorController extends Controller
 {

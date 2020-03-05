@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $sql = file_get_contents(database_path() . '/seeds/languages.sql');
         DB::statement($sql);
-        
+
         $sql = file_get_contents(database_path() . '/seeds/actors.sql');
         DB::statement($sql);
 
@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         DB::statement($sql);
 
         $sql = file_get_contents(database_path() . '/seeds/actors_films.sql');
+        DB::statement($sql);
+
+        $sql = file_get_contents(database_path() . '/seeds/roles.sql');
         DB::statement($sql);
     }
 }

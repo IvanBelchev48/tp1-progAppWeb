@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Critic;
 use App\Http\Requests\CriticRequest;
 
 class CriticController extends Controller
@@ -12,6 +13,11 @@ class CriticController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        return Critic::all();
+    }
+
+    public function critics_film()
     {
         return Critic::all();
     }
@@ -45,9 +51,9 @@ class CriticController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Actor $actor)
+    public function show(Critic $critic)
     {
-        return $actor;
+        return $critic;
     }
 
     /**
