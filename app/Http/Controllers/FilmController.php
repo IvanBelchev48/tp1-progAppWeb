@@ -49,7 +49,17 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
+        return $film;
+    }
+    public function showFilmWithActors(Film $film)
+    {
         $film = Film::with('actors')->findOrFail($film->id);
+        return $film;
+    }
+
+    public function showFilmWithCritics(Film $film)
+    {
+        $film = Film::with('critics')->findOrFail($film->id);
         return $film;
     }
 
