@@ -50,7 +50,6 @@ class FilmController extends Controller
     public function show(Film $film)
     {
         $film = Film::with('actors')->findOrFail($film->id);
-        
         return $film;
     }
 

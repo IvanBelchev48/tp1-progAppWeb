@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Actor;
+use App\Film;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
 
 Route::group(['middleware' => 'auth:api'], function() {
-    Route::post('details', 'UserController@details');
+    Route::get('userDetails', 'UserController@userDetails');
     /* Actor */
     Route::post('actors', 'ActorController@store');
     Route::put('actors/{actor}', 'ActorController@update');
