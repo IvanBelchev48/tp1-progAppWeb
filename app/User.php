@@ -19,6 +19,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Critic');
     }
 
+    public function isAdministrator() {
+        return $this->roles()->where('name', 'Admin')->exists();
+    }
+
     /**
      * The attributes that are mass assignable.
      *

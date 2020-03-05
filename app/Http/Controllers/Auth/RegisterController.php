@@ -8,7 +8,6 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -65,12 +64,14 @@ class RegisterController extends Controller
             return response()->json(['error'=>$validator->errors()], 422);
         }
 
-        $request['password']=Hash::make($request['password']);
-        $user = User::create($request->toArray());
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
 
-        $token = $user->createToken('User Access Token')->accessToken;
-        $response = ['token' => $token];
+        $user = User::create($input);
 
-        return response($response, 200);
+        $success['token'] =  $user->createToken('MyApp')-> accessToken;
+        $success['login'] =  $user->login;
+
+        return response()->json(['success'=>$success], $this-> successStatus);
     }
 }
