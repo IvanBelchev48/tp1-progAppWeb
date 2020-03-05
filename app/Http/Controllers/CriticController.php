@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Critic;
 use App\Http\Requests\CriticRequest;
 
 class CriticController extends Controller

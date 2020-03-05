@@ -5,9 +5,12 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
+    use HasApiTokens, Notifiable;
+
     public function roles(){
         return $this->belongsTo('App\Role');
     }
@@ -15,8 +18,6 @@ class User extends Authenticatable
     public function critics(){
         return $this->hasMany('App\Critic');
     }
-
-    use Notifiable;
 
     /**
      * The attributes that are mass assignable.

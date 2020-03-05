@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Film;
-use Illuminate\Http\Request;
+use App\Http\Resources\FilmResource;
+use App\Http\Requests\FilmRequest;
 
 class FilmController extends Controller
 {
@@ -33,26 +34,10 @@ class FilmController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FilmRequest $request)
     {
-        //$donnees = $request->all();
-
-        // $unFilm = Film::create([
-        //   'title' => $donnees['title'],
-        //   'release_year' => $donnees['release_year'],
-        //   'length' => $donnees['length'],
-        //   'description' => $donnees['description'],
-        //   'rating' => $donnees['rating'],
-        //   'language_id' => $donnees['language_id'],
-        //   'special_features' => $donnees['special_features']
-        //   'image' => $donnees['image']
-        //   'created_at' => $donnees['created_at']
-        //  ]);
-
         $film = Film::create($request->all());
         return response()->json($film, 201);
-        //return $film;
-
     }
 
     /**
@@ -73,7 +58,7 @@ class FilmController extends Controller
      * @param  Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Film $film)
+    public function update(FilmRequest $request, Film $film)
     {
         $film->update($request->all());
         return response()->json($film, 200);

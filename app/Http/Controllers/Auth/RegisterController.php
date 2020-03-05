@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterPagesController extends Controller
+class RegisterController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -41,33 +43,34 @@ class RegisterPagesController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+    public $successStatus = 200;
 
     /**
-     * Create a new user instance after a valid registration.
+     * Register API
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param Request $request
+     * @return Response
      */
-    protected function create(array $data)
+    public function register(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $validator = Validator::make($request->all(), [
+            'login' => 'required',
+            'password' => 'required',
+            'email' => 'required|email',
+            'last_name' => 'required',
+            'first_name' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 422);
+        }
+
+        $request['password']=Hash::make($request['password']);
+        $user = User::create($request->toArray());
+
+        $token = $user->createToken('User Access Token')->accessToken;
+        $response = ['token' => $token];
+
+        return response($response, 200);
     }
 }
