@@ -25,5 +25,11 @@ class DatabaseSeeder extends Seeder
 
         $sql = file_get_contents(database_path() . '/seeds/roles.sql');
         DB::statement($sql);
+
+        $sql = file_get_contents(database_path() . '/seeds/users.sql');
+        DB::statement($sql);
+
+        $sql = file_get_contents(database_path() . '/seeds/critics.sql');
+        DB::statement($sql);
     }
 }
