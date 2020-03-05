@@ -38,8 +38,13 @@ class FilmController extends Controller
      */
     public function store(FilmRequest $request)
     {
-        $film = Film::create($request->all());
-        return response()->json($film, 201);
+        if(Auth::user()->isAdministrator()) {
+            $film = Film::create($request->all());
+            return response()->json($film, 201);
+        }
+        else {
+            return response()->json(['error' => 'You dont have admin rights'], 403);
+        }
     }
 
     /**
@@ -65,7 +70,7 @@ class FilmController extends Controller
         return $film;
     }
 
-    public function showFilmWithRating(Film $film, $rating)
+    public function browseFilmByRating(Film $film, $rating)
     {
         return $film->where('rating', $rating);
     }
@@ -79,8 +84,13 @@ class FilmController extends Controller
      */
     public function update(FilmRequest $request, Film $film)
     {
-        $film->update($request->all());
-        return response()->json($film, 200);
+        if(Auth::user()->isAdministrator()){
+            $film->update($request->all());
+            return response()->json($film, 200);
+        }
+        else {
+            return response()->json(['error' => 'You dont have admin rights'], 403);
+        }
     }
 
     /**
@@ -91,7 +101,13 @@ class FilmController extends Controller
      */
     public function delete(Film $film)
     {
-        $film->delete();
-        return response()->json(null, 204);
+        if (Auth::user()->isAdministrator()) {
+            $film->delete();
+            return response()->json(null, 204);
+        }
+        else {
+            return response()->json(['error' => 'You dont have admin rights'], 403);
+        }
+
     }
 }

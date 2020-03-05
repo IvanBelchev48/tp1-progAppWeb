@@ -20,6 +20,13 @@ class Film extends Model
         return $this->belongsToMany('App\Actor', 'actor_films');
     }
 
+    public function getFilmRatings(){
+        return $this
+            ->getConnection()
+            ->getSchemaBuilder()
+            ->getColumnListing($this->getTable());
+    }
+
     use Notifiable;
 
     /**
