@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 class Actor extends Model
 {
     public function films(){
-        return $this->hasMany('App\Film');
+        return $this->belongsToMany('App\Film', 'actor_films');
     }
 
     use Notifiable;

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Actor;
+use App\Film;
 
 /*
 |--------------------------------------------------------------------------

@@ -17,7 +17,7 @@ class Film extends Model
     }
 
     public function actors(){
-        return $this->belongsToMany('App\Actor');
+        return $this->belongsToMany('App\Actor', 'actor_films');
     }
 
     use Notifiable;
