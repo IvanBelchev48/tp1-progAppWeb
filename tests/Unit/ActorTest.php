@@ -68,7 +68,7 @@ class ActorTest extends TestCase
 
         $this->get(route('actors'))
             ->assertStatus(200)
-            ->assertJson($actors->toArray())
+            ->assertJson($actor->toArray())
             ->assertJsonStructure([
                 '*' => [ 'id', 'first_name', 'last_name'],
             ]);
