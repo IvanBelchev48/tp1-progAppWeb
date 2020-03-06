@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Illuminate\Support\Facades\Artisan;
 
 class ActorTest extends TestCase
 {
@@ -13,9 +14,8 @@ class ActorTest extends TestCase
      */
     public function setUp(): void
     {
-        /*passport::actingAs(
-            User::find(1)
-        );*/
+        parent::setUp();
+        Artisan::call('passport:install',['-vvv' => true]);
 
         $actor = factory(App\Actor::class)->make();
     }

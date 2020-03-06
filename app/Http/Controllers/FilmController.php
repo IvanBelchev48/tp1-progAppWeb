@@ -69,9 +69,30 @@ class FilmController extends Controller
         return $film;
     }
 
-    public function browseFilmByRating(Film $film, $rating)
+    public function browseFilms(Film $film)
     {
-        return $film->where('rating', $rating);
+        if(isset($_GET['keyword']))
+        {
+            $film->where('title','like','%'.$_GET['keyword'].'%');
+            $film->where('description','like','%'.$_GET['keyword'].'%');
+        }
+
+        if(isset($_GET['rating']))
+        {
+            $film->where('rating','like','%'.$_GET['rating'].'%');
+        }
+
+        if(isset($_GET['minLength']))
+        {
+            $film->where('length','>=','%'.$_GET['minLength'].'%');
+        }
+
+        if(isset($_GET['maxLength']))
+        {
+            $film->where('length','<=','%'.$_GET['maxLength'].'%');
+        }
+
+        return $film;
     }
 
     /**
