@@ -19,7 +19,6 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
 
 Route::group(['middleware' => 'auth:api'], function() {
-    Route::get('userDetails', 'UserController@userDetails');
     /* Actor */
     Route::post('actors', 'ActorController@store');
     Route::put('actors/{actor}', 'ActorController@update');
@@ -32,6 +31,10 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('films', 'FilmController@store');
     Route::put('films/{film}', 'FilmController@update');
     Route::delete('films/{film}', 'FilmController@delete');
+    /* User */
+    Route::put('users/user', 'UserController@store');
+    Route::get('userDetails', 'UserController@userDetails');
+    Route::put('settings/user', 'UserController@updateInfo');
 });
 
 /* Actors Routes */
