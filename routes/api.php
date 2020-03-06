@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Actor;
-use App\Film;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

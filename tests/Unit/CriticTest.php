@@ -3,6 +3,8 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Illuminate\Support\Facades\Artisan;
+
 
 class CriticTest extends TestCase
 {
@@ -13,7 +15,9 @@ class CriticTest extends TestCase
      */
     public function setUp(): void
     {
-        passport::actingAs(
+        parent::setUp();
+        Artisan::call('passport:install',['-vvv' => true]);
+        Passport::actingAs(
             User::find(1)
         );
 
