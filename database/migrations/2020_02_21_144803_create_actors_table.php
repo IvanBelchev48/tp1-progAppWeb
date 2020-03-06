@@ -15,6 +15,9 @@ class CreateActorsTable extends Migration
     {
         Schema::create('actors', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('last_name');
+            $table->string('first_name');
+            $table->date('birthdate');
             $table->timestamps();
         });
     }

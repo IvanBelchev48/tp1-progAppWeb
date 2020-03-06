@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -10,7 +13,7 @@ class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Login Controller
+    | Login PagesController
     |--------------------------------------------------------------------------
     |
     | This controller handles authenticating users for the application and
@@ -18,6 +21,8 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
+
+    public $successStatus = 200;
 
     use AuthenticatesUsers;
 
@@ -36,5 +41,24 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Login API
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function login(Request $request){
+        var_dump($request->all());
+
+        if(Auth::attempt($request->all())){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('MyApp')->accessToken;
+            return $user->createToken('Token')->accessToken;
+        }
+        else{
+            return response()->json(['error'=>'Unauthorized'], 401);
+        }
     }
 }

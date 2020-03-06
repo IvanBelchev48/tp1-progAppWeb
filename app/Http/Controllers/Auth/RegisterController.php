@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Register Controller
+    | Register PagesController
     |--------------------------------------------------------------------------
     |
     | This controller handles the registration of new users as well as their
@@ -41,33 +42,36 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
+    public $successStatus = 200;
 
     /**
-     * Create a new user instance after a valid registration.
+     * Register API
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param Request $request
+     * @return Response
      */
-    protected function create(array $data)
+    public function register(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $validator = Validator::make($request->all(), [
+            'login' => 'required',
+            'password' => 'required',
+            'email' => 'required|email',
+            'last_name' => 'required',
+            'first_name' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 422);
+        }
+
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+
+        $user = User::create($input);
+
+        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        $success['login'] =  $user->login;
+
+        return response()->json(['success'=>$success], $this->successStatus);
     }
 }
