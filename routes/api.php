@@ -45,7 +45,10 @@ Route::get('critics/{critic}', 'CriticController@show');
 /* Films Routes */
 Route::get('films', 'FilmController@index');
 Route::get('films/{film}', 'FilmController@show');
-Route::get('films/rating/{rating}', 'FilmController@browseFilmByRating'); /* TO DO */
+Route::get('films/keyword/{keyword}', 'FilmController@browseFilms');
+Route::get('films/rating/{rating}', 'FilmController@browseFilms');
+Route::get('films/minLength/{length}', 'FilmController@browseFilms');
+Route::get('films/maxLength/{length}', 'FilmController@browseFilms');
 
 Route::get('films/{film}/actors', 'FilmController@showFilmWithActors');
 Route::get('films/{film}/critics', 'FilmController@showFilmWithCritics');
