@@ -5,9 +5,13 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
+use App\User;
 
 class ActorTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
@@ -16,11 +20,28 @@ class ActorTest extends TestCase
 
     public function setUp()
     {
-        parent::setUp();
-        Artisan::call('db:seed');
+
+    }
+    public function testDatabase()
+    {
+        passport::actingAs(
+            User::find(1)
+        );
+        $actor = factory(App\Actor::class)->make();
+
+
+        $this->assertDatabaseHas($table, array $data);
     }
 
-    public function test_actor_get_actors_by_id()
+    public function test_get_all_actors()
+    {
+        $this->json('GET', '/api/actors')
+            ->assertStatus(200);
+
+        $response->assertStatus(200);
+    }
+
+    public function test_get_actor_by_id()
     {
         $id = 1;
         $this->json('GET', '/api/actors', $id)
