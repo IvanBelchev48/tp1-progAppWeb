@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Actor::class, function (Faker $faker) {
     return [
-        'first_name' => $faker->first_name,
-        'last_name' => $faker->last_name,
+        'first_name' => $faker->name,
+        'last_name' => $faker->name,
     ];
 });

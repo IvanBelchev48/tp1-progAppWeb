@@ -82,7 +82,7 @@ class ActorTest extends TestCase
         ];
 
         $this->post(route('actors.store'), $data)
-            ->assertStatus(422)
+            ->assertStatus(422);
     }
 
 }
