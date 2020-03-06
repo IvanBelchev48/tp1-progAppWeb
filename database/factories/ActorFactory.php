@@ -9,6 +9,5 @@ $factory->define(Actor::class, function (Faker $faker) {
     return [
         'first_name' => $faker->first_name,
         'last_name' => $faker->last_name,
-        'birthdate' => $faker->birthdate,
     ];
 });

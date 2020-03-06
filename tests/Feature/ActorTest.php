@@ -18,7 +18,7 @@ class ActorTest extends TestCase
      * @return void
      */
 
-    public function setUp()
+    public function setUp(): void
     {
 
     }
@@ -30,7 +30,7 @@ class ActorTest extends TestCase
         $actor = factory(App\Actor::class)->make();
 
 
-        $this->assertDatabaseHas($table, array $data);
+        //$this->assertDatabaseHas($table, array $data);
     }
 
     public function test_get_all_actors()
@@ -48,6 +48,14 @@ class ActorTest extends TestCase
             ->assertStatus(200)
             ->assertJson(['id' => 1]);
 
+        $response->assertStatus(200);
+    }
+
+    public function test_store_new_actor()
+    {
+        $this->json('POST', '/api/actors')
+            ->assertStatus(200);
+    
         $response->assertStatus(200);
     }
 }
