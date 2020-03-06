@@ -17,14 +17,15 @@ class CriticTest extends TestCase
     {
         parent::setUp();
         Artisan::call('passport:install',['-vvv' => true]);
-        Passport::actingAs(
-            User::find(1)
-        );
 
         $critic = factory(App\Critic::class)->make();
     }
     public function test_create_critic()
     {
+        Passport::actingAs(
+            User::find(1)
+        );
+
         $data = [
             'user_id' => 1,
             'film_id' => 2,
@@ -39,6 +40,10 @@ class CriticTest extends TestCase
 
     public function test_update_critic()
     {
+        Passport::actingAs(
+            User::find(1)
+        );
+
         $critic = factory(Critic::class)->create();
 
         $data = [
@@ -54,6 +59,10 @@ class CriticTest extends TestCase
 
     public function test_show_critic()
     {
+        Passport::actingAs(
+            User::find(1)
+        );
+
         $critic = factory(Critic::class)->create();
 
         $this->put(route('critics.show', $critic->id))
@@ -62,6 +71,10 @@ class CriticTest extends TestCase
 
     public function test_delete_critic()
     {
+        Passport::actingAs(
+            User::find(1)
+        );
+
         $critic = factory(Critic::class)->create();
 
         $this->delete(route('critics.delete', $critic->id))
@@ -70,6 +83,10 @@ class CriticTest extends TestCase
 
     public function test_index_critics()
     {
+        Passport::actingAs(
+            User::find(1)
+        );
+
         $critic = factory(Critic::class, 2)->create()->map(function ($critic){
             return $critic->only(['user_id', 'film_id', 'score', 'comment']);
         });
@@ -84,6 +101,10 @@ class CriticTest extends TestCase
 
     public function test_store_critic_with_invalid_data()
     {
+        Passport::actingAs(
+            User::find(1)
+        );
+
         $data = [
             'user_id' => '',
             'film_id' => '',
@@ -95,4 +116,16 @@ class CriticTest extends TestCase
             ->assertStatus(422);
     }
 
+    public function test_store_critic_while_not_authenticated()
+    {   
+        $data = [
+            'user_id' => '',
+            'film_id' => '',
+            'score' => '',
+            'comment' => '',
+        ];
+
+        $this->post(route('critics.store'), $data)
+            ->assertStatus(401);
+    }
 }
