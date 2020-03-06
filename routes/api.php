@@ -19,7 +19,6 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
 
 Route::group(['middleware' => 'auth:api'], function() {
-    Route::get('userDetails', 'UserController@userDetails');
     /* Actor */
     Route::post('actors', 'ActorController@store');
     Route::put('actors/{actor}', 'ActorController@update');
@@ -32,6 +31,10 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('films', 'FilmController@store');
     Route::put('films/{film}', 'FilmController@update');
     Route::delete('films/{film}', 'FilmController@delete');
+    /* User */
+    Route::put('users/user', 'UserController@store');
+    Route::get('userDetails', 'UserController@userDetails');
+    Route::put('settings/user', 'UserController@updateInfo');
 });
 
 /* Actors Routes */
@@ -45,7 +48,10 @@ Route::get('critics/{critic}', 'CriticController@show');
 /* Films Routes */
 Route::get('films', 'FilmController@index');
 Route::get('films/{film}', 'FilmController@show');
-Route::get('films/rating/{rating}', 'FilmController@browseFilmByRating'); /* TO DO */
+Route::get('films/keyword/{keyword}', 'FilmController@browseFilms');
+Route::get('films/rating/{rating}', 'FilmController@browseFilms');
+Route::get('films/minLength/{length}', 'FilmController@browseFilms');
+Route::get('films/maxLength/{length}', 'FilmController@browseFilms');
 
 Route::get('films/{film}/actors', 'FilmController@showFilmWithActors');
 Route::get('films/{film}/critics', 'FilmController@showFilmWithCritics');
